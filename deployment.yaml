@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: saramekshaj/random-number-generator:latest
+          imagePullPolicy: Always
+          securityContext:
+            runAsUser: 10001
+          ports:
+            - containerPort: 8087
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "1024Mi"
+            requests:
+              cpu: "500m"
+              memory: "1024Mi"
